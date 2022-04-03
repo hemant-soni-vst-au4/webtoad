@@ -1,6 +1,6 @@
 # Project:- Webtoad
 
-> This project consists of building an HTML document that matches the appearance of a part of Webtoad website
+> This project consists of building an HTML document that matches the appearance of a part of WebToad website
 
 ## Desktop views
 ![Desktop View](./static/images/desktop.png)
