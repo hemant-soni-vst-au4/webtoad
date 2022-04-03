@@ -10,6 +10,7 @@ body {
 }
 
 .card {
+  padding: 0.8rem 0.8rem 0 0.8rem;
   border-radius: 20px !important;
 }
 

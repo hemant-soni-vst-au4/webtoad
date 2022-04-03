@@ -31,7 +31,7 @@ Use of Grid and Flex in Designing. Media Query, Positioning and floating of elem
 
 - Github: [@hemant-soni-vst-au4](https://github.com/hemant-soni-vst-au4)
 - Twitter: [@Hemants63203059](https://twitter.com/Hemants63203059)
-- Linkedin: [linkedin](https://www.linkedin.com/in/hemant-soni-97427b193/)
+- Linkedin: [linkedin](https://www.linkedin.com/in/hemantso/)
 
 ## 🤝 Contributing
 
