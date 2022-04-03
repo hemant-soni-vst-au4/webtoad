@@ -96,4 +96,14 @@ span {
   .cms {
     display: inline;
   }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px !important;
+  }
+
+  .icon-content {
+    margin-right: 28px;
+  }
 }
