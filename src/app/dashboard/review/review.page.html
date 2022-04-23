@@ -1,0 +1,87 @@
+<ion-content class="ion-no-padding">
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="9" sizeLg="8" sizeXl="8" class="ion-align-self-center">
+        <h1 class="ion-no-margin"><strong>Review</strong></h1>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col class="ion-no-padding ion-align-self-center" sizeXs="12" sizeSm="12" sizeMd="10" sizeLg="9" sizeXl="9">
+        <ion-segment color="danger" mode="md" (ionChange)="segmentChanged($event)" [value]="selectedSegment">
+          <ion-segment-button id="completedLessons" mode="md" value="lesson">
+            <ion-label>Lesson</ion-label>
+          </ion-segment-button>
+          <ion-segment-button id="phrases" mode="md" value="phrasesAndVocab">
+            <ion-label>Phrase & Vocab</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-top ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="10" sizeLg="9" sizeXl="9" class="ion-align-self-center ion-no-padding">
+        <ion-row class="ion-align-items-center ion-justify-content-center"
+          *ngIf="selectedSegment === 'lesson'; else phrasesAndVocab">
+          <ion-col class="ion-align-self-center ion-no-padding">
+            <ion-row class="pointer ion-align-items-center ion-justify-content-center completed-lessons"
+              *ngFor="let completedLesson of completedLessons; let i = index"
+              (click)="onLessonDetails(completedLesson)">
+              <ion-col size-xs="2" size-sm="2" size-md="2" size-lg="1" size-xl="1" class="ion-align-self-center">
+                <h1>
+                  <strong>{{ i + 1 }}</strong>
+                </h1>
+              </ion-col>
+              <ion-col size-xs="3" size-sm="3" size-md="3" size-lg="2" size-xl="2" class="ion-align-self-center">
+                <img src="{{ completedLesson.thumbnail }}" alt="{{ completedLesson.sublessons.lessonName }}" />
+              </ion-col>
+              <ion-col size-xs="7" size-sm="7" size-md="7" size-lg="9" size-xl="9"
+                class="ion-align-self-center ion-padding-start">
+                <div id="lesson-level">{{ completedLesson.level }} - {{ completedLesson.topicDetails.title }}</div>
+                <div id="lesson-name">{{ completedLesson.sublessons.lessonName }}</div>
+                <div id="lesson-completed-date">Studied on {{ completedLesson.createdAt | date: 'mediumDate' }}</div>
+              </ion-col>
+              <!-- <ion-col size="1" class="ion-align-self-center">
+
+                            </ion-col> -->
+            </ion-row>
+            <ion-row *ngIf="!completedLessons.length && completedLessonsLoaded">
+              <ion-col class="ion-text-center">
+                <h5><strong>You haven’t studied any lessons yet.</strong></h5>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+        <ng-template #phrasesAndVocab>
+          <ion-row class="ion-align-items-center ion-justify-content-center">
+            <ion-col class="ion-align-self-center" size-xs="12" size-sm="12" size-md="10" size-lg="9" size-xl="9">
+              <ion-row class="pointer ion-align-items-center ion-justify-content-center completed-lessons border-bottom"
+                *ngFor="let userNote of userNotes; let i = index">
+                <ion-col size-xs="9" size-sm="9" size-md="9" size-lg="9" size-xl="9" class="ion-align-self-center"
+                  (click)="onUserNote(userNote)">
+                  <div id="lesson-name" class="titleMargin">{{ userNote.word }}</div>
+                </ion-col>
+                <ion-col size="3" class="ion-align-self-center ion-no-padding">
+                  <ion-row class="ion-align-items-center">
+                    <ion-col size="6" class="ion-align-self-center" (click)="onSpeakNote(userNote)">
+                      <img id="play-icon" src="../../../assets/images/icon_play.svg" />
+                    </ion-col>
+                    <ion-col size="6" class="ion-align-self-center" (click)="onDeleteUserNote(userNote)">
+                      <ion-icon name="close" color="medium" mode="md"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="!userNotes.length && userNotesLoaded">
+                <ion-col class="ion-text-center">
+                  <h5><strong>You haven’t saved any words yet.</strong></h5>
+                </ion-col>
+              </ion-row>
+              <ion-infinite-scroll threshold="200px" (ionInfinite)="loadUserNotesData($event)">
+                <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+              </ion-infinite-scroll>
+            </ion-col>
+          </ion-row>
+        </ng-template>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

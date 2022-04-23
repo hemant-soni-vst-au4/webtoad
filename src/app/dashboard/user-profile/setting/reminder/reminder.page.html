@@ -1,0 +1,75 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" mode="md">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button mode="md" (click)="home()">
+        <ion-icon color="dark" mode="md" slot="icon-only" src="../../../../../assets/images/home.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeLg="6" sizeMd="7" sizeXl="4" class="ion-align-self-center">
+        <h1 class="ion-no-margin"><strong>Reminder</strong></h1>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="reminder-block ion-align-items-center">
+      <ion-col class="ion-align-self-center">
+        <ion-row *ngIf="reminderTime === undefined; else gotReminder"
+          class="ion-align-items-center ion-justify-content-center ion-text-center">
+          <ion-col sizeXs="12" sizeSm="12" sizeLg="6" sizeMd="7" sizeXl="4" class="ion-align-self-center">
+            <ion-icon class="alarm" src="../../../../../assets/images/alarm.svg"></ion-icon>
+            <h3 class="ion-text-center ion-margin-bottom">
+              Would you like to receive a reminder?
+            </h3>
+          </ion-col>
+        </ion-row>
+        <ng-template #gotReminder>
+          <ion-row class="ion-align-items-center ion-justify-content-center">
+            <ion-col sizeXs="12" sizeSm="12" sizeLg="6" sizeMd="7" sizeXl="4"
+              class="ion-align-self-center ion-text-center ion-margin-top">
+              <ion-icon class="alarm" src="../../../../../assets/images/alarm.svg"></ion-icon>
+              <h3 class="ion-text-center ion-margin-bottom">
+                We will send you a nudge <br />
+                at
+                <ion-text class="c-orange">
+                  {{ reminderTime | date: 'shortTime' }}
+                </ion-text>
+                everyday
+              </h3>
+            </ion-col>
+          </ion-row>
+        </ng-template>
+
+        <ion-row *ngIf="reminderTime === undefined" class="ion-align-items-center ion-justify-content-center">
+          <ion-col sizeXs="10" sizeSm="10" sizeMd="7" sizeLg="6" sizeXl="4" class="ion-align-self-center">
+            <ion-item lines="none">
+              <ion-label color="danger">Yes, set a reminder. <br />
+                <ion-text color="medium">(Push notification)</ion-text>
+              </ion-label>
+              <ion-toggle mode="ios" checked="false" (ionChange)="onChangeReminder($event)">
+              </ion-toggle>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="reminderTime !== undefined" class="ion-align-items-center ion-justify-content-center">
+          <ion-col sizeXs="4" sizeSm="4" sizeMd="7" sizeLg="6" sizeXl="4" class="ion-text-center ion-align-self-center">
+            <ion-item lines="none">
+              <ion-toggle mode="ios" checked="true" (ionChange)="onChangeReminder($event)"></ion-toggle>
+            </ion-item>
+            <a class="c-orange ion-margin-top" (click)="setReminder()">Edit</a>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

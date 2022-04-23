@@ -1,0 +1,36 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-title>
+      Add New Card
+    </ion-title>
+    <ion-buttons slot="end" mode="md">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon slot="icon-only" mode="ios" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form action="/" method="post" id="payment-form">
+    <ion-grid>
+      <ion-row class="ion-margin-top ion-margin-bottom ion-align-items-center ion-justify-content-center">
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="10" sizeLg="10" sizeXl="10" class="ion-align-self-center">
+          <div class="form-row">
+            <div id="card-element">
+              <!-- a Stripe Element will be inserted here. -->
+            </div>
+            <!-- Used to display Element errors -->
+            <div class="c-red" id="card-errors" role="alert"></div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="8" sizeLg="6" sizeXl="6" class="ion-align-self-center">
+          <ion-button type="submit" mode="ios" color="danger" fill="outline" shape="round" expand="block"
+            >Add Card
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

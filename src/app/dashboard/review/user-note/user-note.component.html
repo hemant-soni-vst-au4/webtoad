@@ -1,0 +1,33 @@
+<ion-row>
+  <ion-col>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col size="9" class="ion-align-self-center">
+        <h5 class="ion-no-margin c-red">
+          <strong>{{ userNote?.word }}</strong>
+        </h5>
+      </ion-col>
+      <ion-col size="3" class="ion-align-self-center ion-text-right">
+        <ion-icon mode="md" name="close" class="pointer" id="modal-dismiss" (click)="onDismiss()"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col size="12" class="ion-align-self-center">
+        <ng-container *ngIf="userNote?.meaning; else noMeaning">
+          <p><strong class="c-orange">English: </strong> {{ userNote?.meaning }}</p>
+          <p>{{ userNote?.kor }}</p>
+        </ng-container>
+        <ng-template #noMeaning>
+          <p *ngIf="userNote?.kor"><b class="c-orange">(Korean):</b> {{ userNote?.kor }}</p>
+
+          <p *ngIf="userNote?.noun"><b class="c-orange">(Noun):</b> {{ userNote?.noun }}</p>
+
+          <p *ngIf="userNote?.verb"><b class="c-orange">(Verb):</b> {{ userNote?.verb }}</p>
+
+          <p *ngIf="userNote?.adv"><b class="c-orange">(Adverb):</b> {{ userNote?.adv }}</p>
+
+          <p *ngIf="userNote?.adj"><b class="c-orange">(Adjective):</b> {{ userNote?.adj }}</p>
+        </ng-template>
+      </ion-col>
+    </ion-row>
+  </ion-col>
+</ion-row>

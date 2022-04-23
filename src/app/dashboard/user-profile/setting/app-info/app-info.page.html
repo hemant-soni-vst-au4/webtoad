@@ -1,0 +1,30 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" mode="md">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button mode="md" (click)="home()">
+        <ion-icon color="dark" mode="md" slot="icon-only" src="../../../../../assets/images/home.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-align-items-center ion-justify-content-center" style="padding: 16px 16px 0px 16px;">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="6" sizeXl="4" class="ion-align-self-center">
+        <h1 class="ion-no-margin"><strong>App Information</strong></h1>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-center" style="padding: 16px;">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="6" sizeXl="4" class="ion-align-self-center">
+        <p>Build Version: {{ versionCode }}</p>
+        <p>Build Number: {{ versionNumber }}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

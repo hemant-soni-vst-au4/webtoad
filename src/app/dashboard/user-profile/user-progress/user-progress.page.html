@@ -1,0 +1,104 @@
+<ion-row class="ion-justify-content-center ion-margin-top profile-progress">
+  <ion-col sizeXs="12" sizeSm="12" sizeLg="12" sizeXl="12" sizeMd="12" class="ion-align-self-center ion-no-padding">
+    <!-- <ion-row class="ion-justify-content-center">
+      <ion-col sizeXs="2" sizeSm="2" sizeLg="2" sizeXl="2" sizeMd="2" class="ion-align-self-center ">
+        <ion-icon class="arrow-icons" name="arrow-back" mode="ios"></ion-icon>
+      </ion-col>
+      <ion-col *ngIf="currentMonth" sizeXs="8" sizeSm="8" sizeLg="8" sizeXl="8" sizeMd="8"
+        class="ion-align-self-center">
+        <p class="current-month">{{currentMonth}}</p>
+      </ion-col>
+      <ion-col sizeXs="2" sizeSm="2" sizeLg="2" sizeXl="2" sizeMd="2" class="ion-align-self-center ">
+        <ion-icon class="arrow-icons" name="chevron-forward" mode="ios"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" class="ion-align-self-center">
+        <ion-row class="calender-weekdays border-bottom">
+          <ion-col class="weekend">S</ion-col>
+          <ion-col class="week-days">M</ion-col>
+          <ion-col class="week-days">T</ion-col>
+          <ion-col class="week-days">W</ion-col>
+          <ion-col class="week-days">T</ion-col>
+          <ion-col class="week-days">F</ion-col>
+          <ion-col class="weekend">S</ion-col>
+        </ion-row>
+        <ion-row class="calendar-date">
+          <ion-col size="1" *ngFor="let lastDay of daysInLastMonth" class="last-month-dates">{{lastDay}}</ion-col>
+          <ion-col size="1" *ngFor="let day of daysInThisMonth" class="current-month-dates">
+            <span class="currentDate" *ngIf="currentDate === day; else otherDate">{{day}}</span>
+            <ng-template #otherDate class="otherDate">
+              <span class="other" [ngClass]="{'selected': wasClicked === day}">{{day}}</span>
+            </ng-template>
+          </ion-col>
+          <ion-col size="1" *ngFor="let nextDay of daysInNextMonth" class="next-month-dates">{{nextDay}}</ion-col>
+        </ion-row>
+
+      </ion-col>
+    </ion-row> -->
+
+    <h5 class="current-month">
+      <img src="../../../../assets/images/user-progress/completed.svg" alt="COMPLETED" />
+      COMPLETED IN
+      <span (click)="onMonthChange($event)">{{ currentMonth | uppercase }}</span>
+      <ion-icon class="drop-down" mode="md" name="caret-down" (click)="onMonthChange($event)"></ion-icon>
+    </h5>
+    <h1 class="lessons-count">
+      <strong>{{ currentMonthCompletedLessons.length }}</strong> <small>lessons</small>
+    </h1>
+
+    <h5 class="current-month ion-padding-top">
+      <img src="../../../../assets/images/user-progress/total-completed.svg" alt="TOTAL COMPLETED" />
+      TOTAL COMPLETED
+    </h5>
+    <h1 class="lessons-count">
+      <strong>{{ totalCompletedLessons.length }}</strong> <small>lessons</small>
+    </h1>
+
+    <h5 class="current-month ion-padding-top">
+      <img src="../../../../assets/images/user-progress/upper-beginner.svg" alt="UPPER-BEGINNER STUDIED" />
+      UPPER-BEGINNER STUDIED
+    </h5>
+    <h1 class="lessons-count">
+      <strong>{{ upperBeginnerCompletedLessons.length }}</strong> <small>lessons</small>
+    </h1>
+
+    <h5 class="current-month ion-padding-top">
+      <img src="../../../../assets/images/user-progress/intermediate.svg" alt="INTERMEDIATE STUDIED" />
+      INTERMEDIATE STUDIED
+    </h5>
+    <h1 class="lessons-count">
+      <strong>{{ intermediateCompletedLessons.length }}</strong> <small>lessons</small>
+    </h1>
+
+    <h5 class="current-month ion-padding-top">
+      <img src="../../../../assets/images/user-progress/advanced.svg" alt="ADVANCED" />ADVANCED STUDIED
+    </h5>
+    <h1 class="lessons-count">
+      <strong>{{ advanceCompletedLessons.length }}</strong> <small>lessons</small>
+    </h1>
+    <p class="current-month pointer" (click)="onSubscription()" style="text-decoration: underline">
+      Manage Subscription
+    </p>
+  </ion-col>
+</ion-row>
+<ion-row class="ion-justify-content-center profile-bg-yellow">
+  <ion-col *ngIf="profile?.currentPackage === 'Subscription'; else noSubscription" size-xs="10" size-sm="10" size-lg="7"
+    size-xl="6" size-md="8" class="ion-no-padding ion-align-self-center">
+    <h3 class="ion-no-margin ion-text-center">
+      <strong>Help your friends and family speak English</strong>
+    </h3>
+    <ion-button mode="ios" color="danger" shape="round" expand="block" [routerLink]="['/share-app']"
+      routerLinkActive="router-link-active">
+      <strong>INVITE A FRIEND</strong>
+    </ion-button>
+  </ion-col>
+  <ng-template #noSubscription>
+    <ion-col size-xs="10" size-sm="10" size-lg="7" size-xl="6" size-md="8" class="ion-no-padding ion-align-self-center">
+      <h3 class="ion-no-margin ion-text-center"><strong>Unlock your journey</strong></h3>
+      <ion-button mode="ios" color="danger" shape="round" expand="block" (click)="onSubscription()">
+        <strong>SUBSCRIBE NOW</strong>
+      </ion-button>
+    </ion-col>
+  </ng-template>
+</ion-row>

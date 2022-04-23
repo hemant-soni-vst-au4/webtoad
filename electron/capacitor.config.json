@@ -1,0 +1,8 @@
+{
+  "appId": "com.summer.startenglishnow",
+  "appName": "Speaky Peaky",
+  "bundledWebRuntime": true,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}

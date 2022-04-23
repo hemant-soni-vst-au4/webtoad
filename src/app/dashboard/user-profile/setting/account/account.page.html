@@ -1,0 +1,121 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" mode="md">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button mode="md" (click)="home()">
+        <ion-icon color="dark" mode="md" slot="icon-only" src="../../../../../assets/images/home.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="6" sizeXl="4" class="ion-align-self-center">
+        <h1 class="ion-no-margin"><strong>Account</strong></h1>
+      </ion-col>
+    </ion-row>
+    <ng-container *ngIf="profile !== undefined; else noProfile">
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="6" sizeXl="4" class="ion-align-self-center">
+          <ion-item mode="ios">
+            <ion-label
+              >User name
+              <h3>{{ profile?.fullName | titlecase }}</h3>
+            </ion-label>
+            <ion-button
+              slot="end"
+              color="danger"
+              mode="ios"
+              fill="clear"
+              [routerLink]="['/edit-name']"
+              routerLinkActive="router-link-active"
+              >Edit</ion-button
+            >
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="6" sizeXl="4" class="ion-align-self-center">
+          <ion-item mode="ios">
+            <ion-label
+              >Email
+              <h3>{{ profile?.email }}</h3>
+            </ion-label>
+            <ion-button
+              slot="end"
+              color="danger"
+              mode="ios"
+              fill="clear"
+              [routerLink]="['/edit-email']"
+              routerLinkActive="router-link-active"
+              >Edit</ion-button
+            >
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="6" sizeXl="4" class="ion-align-self-center">
+          <ion-item mode="ios">
+            <ion-label>
+              <h3>Update password</h3>
+            </ion-label>
+            <ion-button
+              slot="end"
+              color="danger"
+              mode="ios"
+              fill="clear"
+              [routerLink]="['/edit-password']"
+              routerLinkActive="router-link-active"
+              >Manage</ion-button
+            >
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="6" sizeXl="4" class="ion-align-self-center">
+          <ion-item mode="ios">
+            <ion-label
+              >Subscription Status
+              <h3>{{ profile?.subscriptionLabel }}</h3>
+            </ion-label>
+            <ion-button slot="end" color="danger" mode="ios" fill="clear" (click)="onSubscription()">Manage</ion-button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="6" sizeXl="4" class="ion-align-self-center">
+          <ion-item mode="ios">
+            <ion-label>
+              <h3>Delete Account</h3>
+            </ion-label>
+            <ion-button slot="end" color="danger" mode='ios' fill="clear" [routerLink]="['/delete-account']"
+              routerLinkActive="router-link-active">Manage</ion-button>
+          </ion-item>
+        </ion-col>
+      </ion-row> -->
+    </ng-container>
+    <ng-template #noProfile>
+      <ion-row class="ion-align-items-center ion-justify-content-center" *ngFor="let item of [0, 1, 2, 3, 4]">
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="6" sizeXl="4" class="ion-align-self-center">
+          <ion-item mode="ios">
+            <ion-label>
+              <ion-skeleton-text animated style="width: 40%;"></ion-skeleton-text>
+              <h3>
+                <ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text>
+              </h3>
+            </ion-label>
+            <ion-button slot="end" color="danger" mode="ios" fill="clear">
+              <ion-skeleton-text animated style="width: 20%;"></ion-skeleton-text>
+            </ion-button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ng-template>
+  </ion-grid>
+</ion-content>

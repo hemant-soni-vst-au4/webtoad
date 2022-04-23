@@ -1,0 +1,11 @@
+ion-content {
+  --background: url('../../../../../../assets/images/on-boarding-language-bg.png');
+
+  ion-card {
+    --background: var(--color-white);
+    margin-bottom: 8px;
+    ion-card-content {
+      padding: 15px;
+    }
+  }
+}

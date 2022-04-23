@@ -1,0 +1,59 @@
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-justify-content-center ion-margin-top">
+      <ion-col sizeXs="2" sizeSm="2" sizeLg="3" sizeXl="2" sizeMd="3" class="ion-align-self-end"> </ion-col>
+      <ion-col sizeXs="8" sizeSm="8" sizeLg="5" sizeXl="4" sizeMd="5" class="ion-align-self-center">
+        <ion-avatar class="pointer" (click)="onUpdateProfilePicture()">
+          <img [src]="profile?.profilePic || '../../../assets/images/defaultProfile.svg'" />
+        </ion-avatar>
+        <ion-icon
+          (click)="onUpdateProfilePicture()"
+          class="update-picture"
+          src="../../../assets/images/update-profile-plus-icon.svg"
+        ></ion-icon>
+        <h3 class="ion-text-center" *ngIf="profile !== undefined; else noProfile">
+          <strong>{{ profile?.fullName | titlecase }}</strong>
+        </h3>
+        <ng-template #noProfile>
+          <h3>
+            <ion-skeleton-text animated style="width: 90%;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text>
+          </h3>
+        </ng-template>
+      </ion-col>
+      <ion-col sizeXs="2" sizeSm="2" sizeLg="3" sizeXl="2" sizeMd="3" class="ion-align-self-start">
+        <ion-buttons class="ion-float-right" mode="ios">
+          <ion-button
+            [routerLink]="['/setting']"
+            routerDirection="forward"
+            routerLinkActive="router-link-active"
+            mode="ios"
+          >
+            <ion-icon color="dark" mode="ios" slot="icon-only" name="cog"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeLg="9" sizeXl="7" sizeMd="9" class="ion-no-padding ion-align-self-center">
+        <ion-segment color="danger" mode="md" value="progress" (ionChange)="segmentChanged($event)">
+          <ion-segment-button mode="md" value="progress">
+            <ion-label>My Progress</ion-label>
+          </ion-segment-button>
+          <ion-segment-button mode="md" value="level">
+            <ion-label>My Level</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeLg="7" sizeXl="6" sizeMd="8" class="ion-no-padding ion-align-self-center">
+        <app-user-progress *ngIf="profile && selectedSegment === 'progress'; else level" [profile]="profile">
+        </app-user-progress>
+        <ng-template #level>
+          <app-user-level *ngIf="profile"></app-user-level>
+        </ng-template>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

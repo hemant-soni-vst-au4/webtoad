@@ -1,0 +1,10 @@
+.chat {
+  z-index: 10;
+  display: inline;
+  position: fixed;
+  bottom: 1%;
+  right: 1%;
+  &.hasTabbar {
+    bottom: 10%;
+  }
+}

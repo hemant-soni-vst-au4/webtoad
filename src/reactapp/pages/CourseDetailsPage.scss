@@ -1,0 +1,86 @@
+// ion-slides {
+//   --bullet-background: #f5833d;
+//   --bullet-background-active: #e22d2d;
+//   overflow-y: scroll;
+// }
+.lesson-heading {
+  color: #aca7a7;
+}
+
+#highlight-save-lesson-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 7px 6px 0px 6px;
+  border-radius: 25px;
+  background: #ffffff;
+  cursor: pointer;
+  ion-icon {
+    font-size: 25px;
+  }
+}
+
+.player-wrapper {
+  background-color: #000;
+  position: relative;
+  // padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+  .player-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .play-btn {
+      position: relative;
+      overflow: hidden;
+      // background-color: #822;
+      border-radius: 10px;
+      width: 95%;
+      height: 60%;
+    }
+  }
+  .react-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+.youtube-handler {
+  padding-top: 10px;
+  background: #efefef;
+  padding-bottom: 4px;
+  ion-icon {
+    font-size: 35px;
+    // padding: 5px 5px 5px 5.5px;
+    // border-radius: 25px;
+    // background: #efefef;
+    // border: 2px solid #000;
+  }
+}
+.course-page {
+  ion-item {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    line-height: 2em;
+    ion-label {
+      .lesson-name {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .studied-date {
+        font-size: 14px;
+        text-align: right;
+        color: #c6c6c6;
+      }
+    }
+    ion-icon {
+      margin-inline-start: 5px;
+      margin-inline-end: 0px;
+    }
+  }
+}

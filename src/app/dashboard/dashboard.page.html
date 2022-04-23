@@ -1,0 +1,61 @@
+<ion-header *ngIf="isDesktop === true">
+  <ion-toolbar>
+    <div fill="none" class="speaky-peaky-logo" [routerLink]="['/dashboard/lessons']"
+      routerLinkActive="router-link-active">
+      <ion-img src="../../assets/images/speaky-peaky_logo.png"></ion-img>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+
+    <ion-tabs (ionTabsDidChange)="tabChanged($event)" (tabChange)="onTabChange($event)" #tab
+      *ngIf="isDesktop === true; else mobile">
+      <ion-tab-bar class="desktop-tab-bar" slot="top">
+        <ng-container *ngTemplateOutlet="tabs"></ng-container>
+      </ion-tab-bar>
+    </ion-tabs>
+
+    <ng-template #mobile>
+      <ion-tabs appSwipeTab (ionTabsDidChange)="tabChanged($event)" (tabChange)="onTabChange($event)" #tab>
+        <ion-tab-bar class="desktop-tab-bar" slot="bottom">
+          <ng-container *ngTemplateOutlet="tabs"></ng-container>
+        </ion-tab-bar>
+      </ion-tabs>
+    </ng-template>
+
+    <ng-template #tabs>
+      <ion-tab-button tab="lessons">
+        <ion-icon
+          [src]="selected === 'lessons' ? '../../assets/images/bottom-tab/lesson-active.svg': '../../assets/images/bottom-tab/lessons.svg'">
+        </ion-icon>
+        <ion-label>Home</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="search-lessons">
+        <ion-icon
+          [src]="selected === 'search-lessons' ? '../../assets/images/bottom-tab/search-active.svg': '../../assets/images/bottom-tab/search.svg'">
+        </ion-icon>
+        <ion-label>Library</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="review">
+        <ion-icon
+          [src]="selected === 'review' ? '../../assets/images/bottom-tab/review-active.svg': '../../assets/images/bottom-tab/review.svg'">
+        </ion-icon>
+        <ion-label>Review</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="profile">
+        <ion-icon
+          [src]="selected === 'profile' ? '../../assets/images/bottom-tab/profile-active.svg': '../../assets/images/bottom-tab/profile.svg'">
+        </ion-icon>
+        <ion-label id="user-name" *ngIf="profile; else noProfile">{{ profile?.fullName | titlecase }}</ion-label>
+        <ng-template #noProfile>
+          <ion-label id="user-name">Profile</ion-label>
+        </ng-template>
+      </ion-tab-button>
+    </ng-template>
+
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,51 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" mode="md">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button mode="md" (click)="home()">
+        <ion-icon color="dark" mode="md" slot="icon-only" src="../../../../assets/images/home.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="6" sizeXl="4" class="ion-align-self-center">
+        <h1 class="ion-no-margin"><strong>Settings</strong></h1>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="6" sizeXl="4" class="ion-align-self-center">
+        <ion-list>
+          <ion-item *ngFor="let settingPage of settingPages" mode="md" [routerLink]="[settingPage.url]"
+            routerLinkActive="router-link-active">
+            <ion-label tabindex="0">{{ settingPage.name }}</ion-label>
+            <ion-icon mode="ios" name="chevron-forward" slot="end"></ion-icon>
+          </ion-item>
+          <ion-item mode="md" (click)="rateApp()" class="pointer">
+            <ion-label tabindex="0">Rate this app</ion-label>
+            <ion-icon mode="ios" name="chevron-forward" slot="end"></ion-icon>
+          </ion-item>
+          <ion-item mode="md" (click)="termsOfUse()" class="pointer">
+            <ion-label tabindex="0">Terms of Use</ion-label>
+            <ion-icon mode="ios" name="chevron-forward" slot="end"></ion-icon>
+          </ion-item>
+          <ion-item mode="md" (click)="privacyPolicy()" class="pointer" tabindex="0">
+            <ion-label tabindex="0">Privacy Policy</ion-label>
+            <ion-icon mode="ios" name="chevron-forward" slot="end"></ion-icon>
+          </ion-item>
+          <ion-item class="pointer">
+            <ion-label tabindex="0" (click)="logout()">Log Out</ion-label>
+            <ion-icon mode="ios" name="chevron-forward" slot="end"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,66 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" mode="md">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button mode="md" (click)="home()">
+        <ion-icon color="dark" mode="md" slot="icon-only" src="../../../../assets/images/home.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="10" sizeLg="9" sizeXl="9" class="ion-align-self-center">
+        <h1 class="ion-no-margin"><strong>New Uploads</strong></h1>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col class="ion-no-padding ion-align-self-center" sizeXs="12" sizeSm="12" sizeMd="10" sizeLg="9" sizeXl="9">
+        <ion-list mode="md" class="ion-no-padding" list="none">
+          <ion-item
+            *ngFor="let item of sharedService.removeDuplicatesByProperty(newUploadsLessons, '_id')"
+            mode="md"
+            [routerLink]="['/lesson-details', item.subLessonId, false, false]"
+            routerLinkActive="router-link-active"
+          >
+            <ion-thumbnail slot="start">
+              <ion-img src="{{ item.thumbnail }}"></ion-img>
+            </ion-thumbnail>
+            <ion-label>
+              <h2 class="ion-text-wrap">{{ item.lessonName }}</h2>
+              <p>
+                {{ item.videoLevel }}
+              </p>
+            </ion-label>
+            <ion-icon mode="ios" name="chevron-forward" slot="end"></ion-icon>
+          </ion-item>
+        </ion-list>
+        <ion-list *ngIf="isNewUploadLessons" mode="md" class="ion-no-padding" list="none">
+          <ion-item mode="md" *ngFor="let item of [0, 1, 2, 3, 4, 5]">
+            <ion-thumbnail slot="start">
+              <ion-img src="../../../../assets/images/thumbnail-youtube.jpg"></ion-img>
+            </ion-thumbnail>
+            <ion-label>
+              <h2 class="ion-text-wrap">
+                <ion-skeleton-text animated style="width: 90%;"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 75%;"></ion-skeleton-text>
+              </h2>
+              <p>
+                <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+            <ion-icon mode="ios" name="chevron-forward" slot="end"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-infinite-scroll threshold="200px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

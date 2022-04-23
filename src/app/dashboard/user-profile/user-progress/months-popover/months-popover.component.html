@@ -1,0 +1,7 @@
+<div *ngFor="let month of months; let i = index">
+  <ion-item lines="none" (click)="selectMonth(month, i)">
+    <ion-label [class.c-red]="month === currentMonth">
+      {{ month | titlecase }}
+    </ion-label>
+  </ion-item>
+</div>

@@ -1,0 +1,70 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" mode="md">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button mode="md" (click)="home()">
+        <ion-icon color="dark" mode="md" slot="icon-only" src="../../../../../../assets/images/home.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="6" sizeSm="6" sizeMd="3" sizeLg="2" sizeXl="2" class="ion-align-self-center">
+        <h1 class="ion-no-margin"><strong>FAQ</strong></h1>
+      </ion-col>
+      <ion-col
+        sizeXs="6"
+        sizeSm="6"
+        sizeMd="3"
+        sizeLg="2"
+        sizeXl="2"
+        class="ion-align-self-center"
+        [routerLink]="['/email-the-team']"
+        routerLinkActive="router-link-active"
+      >
+        <ion-text class="c-orange ion-float-right">Email the team</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeXl="4" sizeLg="6" class="ion-align-self-center">
+        <ion-searchbar
+          mode="md"
+          id="searchFaq"
+          name="searchFaq"
+          [(ngModel)]="searchFaq"
+          placeholder="Search your questions"
+        ></ion-searchbar>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeXl="4" sizeLg="6" class="ion-no-padding ion-align-self-center">
+        <ion-list>
+          <ion-item *ngFor="let faq of faqs | filterFaqs: searchFaq" (click)="expandItem(faq)">
+            <div>
+              <ion-row class="ion-align-items-center ion-justify-content-center">
+                <ion-col class="ion-no-padding ion-align-self-center" size="11">
+                  <p id="expandWrapper">Q. {{ faq.question }}</p>
+                </ion-col>
+                <ion-col class="ion-no-padding ion-align-self-center" size="1">
+                  <ion-icon *ngIf="faq.expanded; else Expanded" mode="ios" name="chevron-up"></ion-icon>
+                  <ng-template #Expanded>
+                    <ion-icon mode="ios" name="chevron-down"></ion-icon>
+                  </ng-template>
+                </ion-col>
+              </ion-row>
+              <div id="expandWrapper" class="expand-wrapper c-orange" [class.collapsed]="!faq.expanded">
+                {{ faq.answer }}
+              </div>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

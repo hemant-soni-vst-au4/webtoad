@@ -1,0 +1,20 @@
+ion-list-header {
+  --background: lightgray;
+}
+ion-item {
+  ion-label {
+    span {
+      font-size: 20px;
+    }
+  }
+}
+#add-card-icon {
+  font-size: 25px;
+  margin-right: 5px;
+  display: inline-flex;
+  vertical-align: middle;
+}
+.warning {
+  --background: #bad9b5;
+  font-weight: 600;
+}

@@ -1,54 +1,27 @@
-# Project:- Webtoad
-
-> This project consists of building an HTML document that matches the appearance of a part of WebToad website
-
-## Desktop views
-![Desktop View](./static/images/desktop.png)
-## Tablet views
-![Tablet View](./static/images/tablet.png)
-## Mobile views
-![Mobile View](./static/images/mobile.png)
-
-Use of Grid and Flex in Designing. Media Query, Positioning and floating of elements to make this site Responsive.
-
-## Built With
-
-- HTML and CSS,
-- Grid and Flex,
-- Figma
-- Media Query
-- BootStrap
-- Linter
-
-## Live Demo
-
-[Live Demo Link](https://hemant-soni-vst-au4.github.io/webtoad/)
+## Resource
 
 
-## Authors
 
-👤 **Hemant soni**
 
-- Github: [@hemant-soni-vst-au4](https://github.com/hemant-soni-vst-au4)
-- Twitter: [@Hemants63203059](https://twitter.com/Hemants63203059)
-- Linkedin: [linkedin](https://www.linkedin.com/in/hemantso/)
+### Links
 
-## 🤝 Contributing
+### Ionic
+- https://ionicframework.com/docs/react
+- https://ionicframework.com/docs/components
 
-Contributions, issues and feature requests are welcome!
+### IAP
+- https://github.com/j3k0/cordova-plugin-purchase/blob/master/doc/api.md
+- https://purchase.cordova.fovea.cc/
+- https://billing-dashboard.fovea.cc/dashboard
+- https://developers.google.com/android-publisher/api-ref/rest/v3/purchases.subscriptions
 
-Feel free to check the [issues page](https://github.com/hemant-soni-vst-au4/webtoad/issues).
 
-## Show your support
 
-Give a ⭐️ if you like this project!
+### Js Error Logging
+- https://github.com/cheeaun/javascript-error-logging
+- https://www.loggly.com/blog/best-practices-for-client-side-logging-and-error-handling-in-react/
+- https://sentry.io/auth/login/whitesocks/
 
-## Acknowledgments
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
-
-## 📝 License
-
-This project is [WebToad](https://webtoad.dev/) licensed.
+### Screen Orientation
+- https://capacitorjs.com/docs/guides/screen-orientation

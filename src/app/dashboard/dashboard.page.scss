@@ -1,0 +1,36 @@
+ion-tab-button {
+  --color-selected: #e22d2d;
+  ion-label#user-name {
+    width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+.swipe-area {
+  height: 100%;
+  width: 100%;
+}
+ion-toolbar {
+  --min-height: 65px !important;
+}
+.speaky-peaky-logo {
+  cursor: pointer;
+  height: 60px !important;
+  margin: 0 auto;
+
+  &:focus {
+    outline: none;
+  }
+  ion-img {
+    // width: 50%;
+    height: 60px;
+  }
+}
+@media only screen and (max-width: 414px) {
+  ion-tab-button {
+    ion-label#user-name {
+      width: 78px;
+    }
+  }
+}

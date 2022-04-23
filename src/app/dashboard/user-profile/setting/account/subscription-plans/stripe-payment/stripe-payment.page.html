@@ -1,0 +1,82 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" mode="md">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row *ngIf="isProcessing" class="ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="6" sizeLg="4" sizeXl="4" class="ion-align-self-center">
+        <ion-card mode="ios" class="ion-no-margin ion-margin-top warning">
+          <ion-card-content>
+            Your order Is being processed. Please DO NOT close the page or click the back or refresh buttons.
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col
+        sizeXs="12"
+        sizeSm="12"
+        sizeMd="6"
+        sizeLg="4"
+        sizeXl="4"
+        class="ion-no-padding ion-padding ion-align-self-center"
+      >
+        <h1 class="ion-no-margin">Payment options</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="6" sizeLg="4" sizeXl="4" class="ion-no-padding ion-align-self-center">
+        <ion-list mode="md" class="ion-no-padding">
+          <ion-list-header mode="md">
+            <ion-label>Credit / Debit Cards</ion-label>
+          </ion-list-header>
+          <ion-item
+            mode="md"
+            *ngFor="let paymentCard of paymentCards | filterPaymentCardsByDate"
+            (click)="onSetDefaultCard(paymentCard)"
+          >
+            <ion-label> <span>xxxx-xxxx-xxxx-</span>{{ paymentCard.card.last4 }} </ion-label>
+            <ion-icon
+              *ngIf="paymentCard.default"
+              mode="ios"
+              color="success"
+              name="checkmark-circle"
+              size="large"
+              slot="end"
+            ></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="6" sizeLg="4" sizeXl="4" class="ion-padding-start ion-align-self-center">
+        <p (click)="onAddCard()" class="pointer">
+          <ion-icon id="add-card-icon" name="add-circle-outline"></ion-icon> ADD NEW CARD
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-row class="ion-align-items-center ion-justify-content-center">
+    <ion-col sizeXs="12" sizeSm="12" sizeMd="6" sizeLg="4" sizeXl="4" class="ion-align-self-center">
+      <ion-button
+        mode="ios"
+        [disabled]="customerDetails === undefined"
+        (click)="onProcessedToPayUsingStripe()"
+        color="danger"
+        shape="round"
+        expand="block"
+        >Process To Pay
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

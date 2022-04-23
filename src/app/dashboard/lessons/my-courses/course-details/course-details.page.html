@@ -1,0 +1,161 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" mode="md">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button mode="md" (click)="home()">
+        <ion-icon color="dark" mode="md" slot="icon-only" src="../../../../../assets/images/home.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid *ngIf="courseDetails" class="ion-no-padding">
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="10" sizeLg="9" sizeXl="8" class="ion-align-self-center">
+        <h1 class="ion-padding-start"><strong>Course Details</strong></h1>
+      </ion-col>
+    </ion-row>
+    <ion-row
+      *ngIf="courseDetails !== undefined; else loadingPlaceholder"
+      class="lesson ion-align-items-center ion-justify-content-center"
+    >
+      <ion-col
+        class="ion-no-padding ion-align-self-center ion-padding-top youtube-container"
+        sizeXs="12"
+        sizeSm="12"
+        sizeMd="10"
+        sizeLg="9"
+        sizeXl="8"
+        #container
+      >
+        <ngx-y2-player
+          #video
+          [videoId]="courseDetails.youtubeId"
+          [playerOptions]="playerOptions"
+          [container]="container"
+          (ready)="onReady($event)"
+          (stateChange)="onStateChange($event)"
+        >
+        </ngx-y2-player>
+      </ion-col>
+    </ion-row>
+    <!-- <ng-template #noYouTubeId>
+      <ion-spinner></ion-spinner>
+    </ng-template> -->
+    <ng-template #loadingPlaceholder>
+      <ion-row class="lesson ion-align-items-center ion-justify-content-center">
+        <ion-col
+          sizeXs="12"
+          sizeSm="12"
+          sizeMd="10"
+          sizeLg="8"
+          sizeXl="8"
+          class="ion-align-self-center ion-no-padding youtube-container"
+        >
+          <!-- <ion-spinner></ion-spinner> -->
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="10" sizeLg="8" sizeXl="8" class="ion-align-self-center ion-no-padding">
+          <ion-row class="youtube-handler ion-align-items-center ion-justify-content-center" style="height: 54px;">
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ng-template>
+    <ion-row *ngIf="courseDetails !== undefined" class="ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="10" sizeLg="9" sizeXl="8" class="ion-align-self-center ion-no-padding">
+        <ion-row class="youtube-handler ion-align-items-center ion-justify-content-center">
+          <ion-col
+            *ngIf="!isPlay"
+            sizeXs="3"
+            sizeSm="3"
+            sizeMd="3"
+            sizeLg="3"
+            sizeXl="3"
+            class="ion-align-self-center ion-no-padding"
+            (click)="playVideoAt()"
+          >
+            <ion-icon class="pointer" src="../../../../../assets/images/lessons/3seconds-back.svg"></ion-icon>
+          </ion-col>
+          <ion-col
+            *ngIf="isPlay; else pause"
+            sizeXs="2"
+            sizeSm="2"
+            sizeMd="2"
+            sizeLg="2"
+            sizeXl="2"
+            class="ion-text-center ion-align-self-center ion-no-padding"
+            (click)="playVideo()"
+          >
+            <ion-icon class="pointer" src="../../../../../assets/images/lessons/play-lesson.svg"></ion-icon>
+          </ion-col>
+          <ng-template #pause>
+            <ion-col
+              sizeXs="4"
+              sizeSm="4"
+              sizeMd="4"
+              sizeLg="4"
+              sizeXl="4"
+              class="ion-align-self-center ion-no-padding"
+              (click)="pauseVideo()"
+            >
+              <ion-icon class="pointer" src="../../../../../assets/images/lessons/pause-lesson.svg"></ion-icon>
+            </ion-col>
+          </ng-template>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding-start ion-padding-end ion-align-items-center ion-justify-content-center">
+      <ion-col class="ion-no-padding ion-align-self-center" sizeXs="12" sizeSm="12" sizeMd="10" sizeLg="9" sizeXl="8">
+        <p class="c-dark-grey">
+          <strong *ngIf="courseDetails?.subLessons.length <= 1; else moreEpisodes">
+            {{ courseDetails?.subLessons.length }} Episode
+          </strong>
+          <ng-template #moreEpisodes>
+            <strong> {{ courseDetails?.subLessons.length }} Episode </strong>
+          </ng-template>
+        </p>
+        <ion-text class="c-orange">{{ courseDetails?.tags }}</ion-text
+        ><br /><br />
+        <p class="c-dark-grey" *ngIf="courseDetails?.title">
+          <strong>{{ courseDetails?.title }}</strong>
+        </p>
+        <ion-text class="c-dark-grey">{{ courseDetails?.introduction }}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row
+      class="ion-padding-start ion-padding-end ion-padding-top ion-align-items-center ion-justify-content-center"
+    >
+      <ion-col class="ion-no-padding ion-align-self-center" sizeXs="12" sizeSm="12" sizeMd="10" sizeLg="9" sizeXl="8">
+        <ion-list>
+          <ion-item
+            class="pointer"
+            *ngFor="let subLesson of courseDetails?.subLessons"
+            (click)="onLessonDetails(subLesson)"
+          >
+            <ion-label color="dark">
+              <ion-row *ngIf="subLesson?.completedLesson !== null">
+                <ion-col class="ion-no-padding lesson-name" size="8">
+                  {{ subLesson.lessonName }}
+                </ion-col>
+                <ion-col class="ion-no-padding studied-date" size="4">
+                  {{ subLesson?.completedLesson?.createdAt | date: 'mediumDate' }}
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="subLesson?.completedLesson === null">
+                <ion-col class="ion-no-padding lesson-name" size="12">
+                  {{ subLesson.lessonName }}
+                </ion-col>
+              </ion-row>
+            </ion-label>
+            <ion-icon color="medium" name="chevron-forward" mode="ios" slot="end"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

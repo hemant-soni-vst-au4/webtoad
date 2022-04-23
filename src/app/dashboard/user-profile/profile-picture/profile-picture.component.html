@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="secondary">
+      <ion-button color="light" (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Update Profile Picture</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid class="ion-padding h-100">
+    <ion-row class="ion-justify-content-center h-100">
+      <ion-col size="12" class="ion-align-self-center">
+        <ion-row *ngIf="isCropperReady === false" class="ion-justify-content-center">
+          <ion-col size-xs="12" size-sm="12" size-md="12" size-xl="6" size-lg="6" class="ion-align-self-center">
+            <label class="profile-image">
+              Choose Image
+              <input type="file" class="form-control" accept="image/*" (change)="onSelectProfile($event)" />
+            </label>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="isCropperReady === false" class="ion-justify-content-center">
+          <ion-col size-xs="12" size-sm="12" size-md="12" size-xl="6" size-lg="6" class="ion-align-self-center">
+            <ion-button mode="ios" color="danger" shape="round" expand="block" (click)="takePicture()"
+              >Capture Image
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="isCropperReady === true" class="ion-justify-content-center">
+          <ion-col size="12" class="ion-justify-content-center">
+            <image-cropper
+              [imageBase64]="imageBase64"
+              [imageQuality]="100"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="4 / 3"
+              [resizeToWidth]="500"
+              format="jpeg"
+              [cropperMinWidth]="150"
+              [alignImage]="'center'"
+              (imageLoaded)="imageLoaded($event)"
+              (imageCropped)="imageCropped($event)"
+              (loadImageFailed)="loadImageFailed()"
+            >
+            </image-cropper>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer *ngIf="isCropperReady === true">
+  <ion-row class="ion-justify-content-center">
+    <ion-col size-xs="12" size-sm="12" size-md="12" size-xl="8" size-lg="8" class="ion-align-self-center">
+      <ion-button mode="ios" color="danger" shape="round" expand="block" (click)="onSubmit()">
+        <strong>UPLOAD</strong>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

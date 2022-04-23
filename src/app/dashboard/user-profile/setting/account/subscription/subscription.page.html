@@ -1,0 +1,120 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" mode="md">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button mode="md" (click)="home()">
+        <ion-icon color="dark" mode="md" slot="icon-only" src="../../../../../../assets/images/home.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-progress-bar *ngIf="!isProduct" type="indeterminate"></ion-progress-bar>
+  <ng-template #loading>
+    <ion-grid class="ion-padding">
+      <ion-row class="ion-align-items-center">
+        <ion-col size="12" class="ion-align-self-center">
+          <ion-row class="ion-margin-bottom ion-align-items-center ion-justify-content-center">
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="6" sizeXl="4" class="ion-align-self-center">
+              <h1 class="ion-no-margin">Subscription Status</h1>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-margin-bottom ion-align-items-center ion-justify-content-center">
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="7" class="ion-align-self-center">
+              <ion-text color="medium">Type</ion-text>
+              <h3 class="mt-5">
+                <ion-skeleton-text animated style="width: 40%;"></ion-skeleton-text>
+              </h3>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-margin-bottom ion-align-items-center ion-justify-content-center">
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="7" class="ion-align-self-center">
+              <ion-text color="medium">Start Date</ion-text>
+              <h3 class="mt-5">
+                <ion-skeleton-text animated style="width: 55%;"></ion-skeleton-text>
+              </h3>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-margin-bottom ion-align-items-center ion-justify-content-center">
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="7" class="ion-align-self-center">
+              <ion-text color="medium">
+                <ion-skeleton-text animated style="width: 30%;"></ion-skeleton-text>
+              </ion-text>
+              <h3 class="mt-5">
+                <ion-skeleton-text animated style="width: 55%;"></ion-skeleton-text>
+              </h3>
+            </ion-col>
+          </ion-row>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-template>
+
+  <ion-grid *ngIf="isProduct; else loading" class="ion-padding">
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12" class="ion-align-self-center">
+        <ion-row class="ion-margin-bottom ion-align-items-center ion-justify-content-center">
+          <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="6" sizeXl="4" class="ion-align-self-center">
+            <h1 class="ion-no-margin">Subscription Status</h1>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-margin-bottom ion-align-items-center ion-justify-content-center">
+          <ion-col sizeXs="12" sizeSm="12" sizeMd="7" class="ion-align-self-center">
+            <ion-text color="medium">Type</ion-text>
+            <h3 class="mt-5" *ngIf="subscriptionDetails?.productType === 'yearly'">
+              Annual
+            </h3>
+            <h3 class="mt-5" *ngIf="subscriptionDetails?.productType === '6_months'">
+              6 Months
+            </h3>
+            <h3 class="mt-5" *ngIf="subscriptionDetails?.productType === 'monthly'">
+              Monthly
+            </h3>
+            <h3 class="mt-5" *ngIf="
+                profile.currentPackage === 'Subscription' &&
+                (profile.subscriptionType === undefined || profile.subscriptionType === null)
+              ">
+              Monthly
+            </h3>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-margin-bottom ion-align-items-center ion-justify-content-center">
+          <ion-col sizeXs="12" sizeSm="12" sizeMd="7" class="ion-align-self-center">
+            <ion-text color="medium">Start Date</ion-text>
+            <h3 class="mt-5">
+              {{ subscriptionDetails?.userSubscriptionStartDate | date: 'longDate' }}
+            </h3>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-margin-bottom ion-align-items-center ion-justify-content-center">
+          <ion-col sizeXs="12" sizeSm="12" sizeMd="7" class="ion-align-self-center">
+            <ion-text color="medium" *ngIf="subscriptionDetails?.autoRenewal === true">Subscription Renews On
+            </ion-text>
+            <ion-text color="medium" *ngIf="subscriptionDetails?.autoRenewal === false">Subscription Expires On
+            </ion-text>
+            <h3 class="mt-5">
+              {{ subscriptionDetails?.userSubscriptionEndDate | date: 'longDate' }}
+            </h3>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="subscriptionDetails?.autoRenewal === true"
+          class="ion-align-items-center ion-justify-content-center">
+          <ion-col sizeXs="12" sizeSm="12" sizeMd="7" class="ion-align-self-center">
+            <ion-text id="auto-renewal" color="medium" (click)="turnOffAutoRenewal()">Turn off auto-renewal</ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="isWeb && subscriptionDetails?.subscriptionType === 'Stripe'"
+          class="ion-align-items-center ion-justify-content-center">
+          <ion-col sizeXs="12" sizeSm="12" sizeMd="7" class="ion-align-self-center">
+            <ion-text id="auto-renewal" color="medium" (click)="gotoStripeManage()">Manage Stripe Cards</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

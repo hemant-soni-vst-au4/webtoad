@@ -1,0 +1,65 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" mode="md">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button mode="md" (click)="home()">
+        <ion-icon color="dark" mode="md" slot="icon-only" src="../../../../../../assets/images/home.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="4" sizeXl="6" class="ion-align-self-center">
+        <h1 class="ion-no-margin"><strong>Email Us</strong></h1>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeXl="4" sizeLg="6" class="ion-align-self-center">
+        <p>
+          Hi There! We will personally reply to you as soon as possible. If you want to find a solution to an issue
+          immediately, check our
+          <span class="c-orange" (click)="back()" style="text-decoration: underline;">FAQ</span>, you may find most
+          answers you need with just a few clicks.
+        </p>
+      </ion-col>
+    </ion-row>
+    <form [formGroup]="mailForm" (ngSubmit)="submit()">
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeXl="4" sizeLg="6" class="ion-align-self-center">
+          <ion-item>
+            <ion-input placeholder="Subject*" formControlName="subject"></ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="!f.subject.valid && (f.subject.dirty || isSubmitted)">
+            <small>Subject is required.</small>
+          </ion-text>
+          <ion-item class="ion-margin-top">
+            <ion-textarea rows="6" placeholder="Description*" formControlName="message"></ion-textarea>
+          </ion-item>
+          <ion-text color="danger" *ngIf="!f.message.valid && (f.message.dirty || isSubmitted)">
+            <small>Description is required.</small>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center ion-justify-content-center ion-margin-top">
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeXl="4" sizeLg="6" class="ion-align-self-center">
+          <ion-button
+            mode="ios"
+            color="danger"
+            fill="outline"
+            shape="round"
+            expand="block"
+            type="submit"
+            [disabled]="mailForm.invalid"
+            >Submit
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>

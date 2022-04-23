@@ -1,0 +1,70 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" mode="md">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button mode="md" (click)="home()">
+        <ion-icon color="dark" mode="md" slot="icon-only" src="../../../../assets/images/home.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-no-padding">
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="10" sizeLg="9" sizeXl="8" class="ion-align-self-center">
+        <h1 class="ion-no-margin">
+          <strong>{{ suggestedCurriculumTitle }}</strong>
+        </h1>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="10" sizeLg="9" sizeXl="8" class="ion-no-padding ion-align-self-center">
+        <ion-segment color="danger" mode="md" (ionChange)="segmentChanged($event)" [value]="videoLevel">
+          <ion-segment-button mode="md" value="Elementary">
+            <ion-label>Upper-Beginner</ion-label>
+          </ion-segment-button>
+          <ion-segment-button mode="md" value="Intermediate">
+            <ion-label>Intermediate</ion-label>
+          </ion-segment-button>
+          <ion-segment-button mode="md" value="Advanced">
+            <ion-label>Advanced</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+
+    <div [ngSwitch]="videoLevel">
+      <div *ngSwitchCase="'Elementary'">
+        <app-course
+          [courseList]="elementaryCourse"
+          [isCourseList]="isSearchLessonsList"
+          (expandItemAction)="onExpandItem($event)"
+          (courseAction)="onCourseDetails($event)"
+        ></app-course>
+      </div>
+      <div *ngSwitchCase="'Intermediate'">
+        <app-course
+          [courseList]="intermediateCourse"
+          [isCourseList]="isSearchLessonsList"
+          (expandItemAction)="onExpandItem($event)"
+          (courseAction)="onCourseDetails($event)"
+        ></app-course>
+      </div>
+      <div *ngSwitchDefault>
+        <app-course
+          [courseList]="advancedCourse"
+          [isCourseList]="isSearchLessonsList"
+          (expandItemAction)="onExpandItem($event)"
+          (courseAction)="onCourseDetails($event)"
+        ></app-course>
+      </div>
+    </div>
+  </ion-grid>
+  <ion-infinite-scroll threshold="200px" (ionInfinite)="loadData($event)" #infiniteScroll>
+    <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

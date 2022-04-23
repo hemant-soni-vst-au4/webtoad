@@ -1,0 +1,45 @@
+ion-content {
+  ion-list {
+    ion-item {
+      --padding-start: 0;
+      --inner-padding-end: 0;
+      ion-thumbnail {
+        width: 120px;
+        height: 90px;
+        --border-radius: 15px;
+      }
+      h2.ion-text-wrap {
+        line-height: 1.35em;
+        max-height: 2.7em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      ion-icon {
+        margin-inline-start: 10px;
+      }
+    }
+  }
+  ion-card {
+    font-weight: 500;
+  }
+  ion-spinner {
+    display: block;
+    margin: 0 auto;
+  }
+}
+.search-categories {
+  padding: 7px 20px;
+  .search-categories-icon {
+    width: 40%;
+    // width: 60px;
+    height: 60px;
+    float: right;
+  }
+}
+@media only screen and (max-width: 414px) {
+  .search-categories {
+    .search-categories-icon {
+      width: 50%;
+    }
+  }
+}

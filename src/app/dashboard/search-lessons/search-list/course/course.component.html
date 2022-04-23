@@ -1,0 +1,91 @@
+<ng-container>
+  <ion-row class="course pointer ion-align-items-center ion-justify-content-center" *ngFor="let course of courseList">
+    <ion-col sizeXs="12" sizeSm="12" sizeMd="10" sizeLg="9" sizeXl="9" class="ion-no-padding ion-align-self-center">
+      <ion-row class="search-course-item">
+        <ion-col size="auto" (click)="onExpandItem(course, $event)">
+          <ion-thumbnail>
+            <ion-img src="{{ course.thumbnail }}"></ion-img>
+          </ion-thumbnail>
+        </ion-col>
+        <ion-col class="ion-padding-start">
+          <ion-label>
+            <h2 class="ion-text-wrap" (click)="onCourseDetails(course, $event)">
+              {{ course.title || course.introduction }}
+            </h2>
+            <p id="scenes-count">
+              <ion-text color="medium"> {{ course.subLessons.length }} Episode </ion-text>
+            </p>
+            <ion-row (click)="onExpandItem(course, $event)" class="ion-align-items-center ion-justify-content-center">
+              <ion-col size="10" class="ion-no-padding ion-align-self-center">
+                <ion-text color="medium" id="tags">
+                  {{ course.tags }}
+                </ion-text>
+              </ion-col>
+              <ion-col size="2" class="ion-no-padding ion-text-center ion-align-self-center">
+                <ion-icon color="medium" id="collapsible-icons" *ngIf="course.expanded; else Expanded" mode="ios"
+                  name="chevron-up">
+                </ion-icon>
+                <ng-template #Expanded>
+                  <ion-icon color="medium" id="collapsible-icons" mode="ios" name="chevron-down"></ion-icon>
+                </ng-template>
+              </ion-col>
+            </ion-row>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row class="expand-wrapper" [class.collapsed]="!course.expanded">
+        <ion-col>
+          <ion-row *ngFor="let subLesson of course.subLessons"
+            [routerLink]="['/lesson-details', subLesson._id, false, false]" routerLinkActive="router-link-active">
+            <ion-col class="ion-no-padding lesson-name" size="12" *ngIf="subLesson?.completedLesson === null">
+              <p class="sub-lessons">
+                {{ subLesson?.lessonName }}
+              </p>
+            </ion-col>
+            <ion-col class="ion-no-padding lesson-name" size="8" *ngIf="subLesson?.completedLesson !== null">
+              <p class="sub-lessons">
+                {{ subLesson?.lessonName }}
+              </p>
+            </ion-col>
+            <ion-col class="ion-no-padding studied-date" size="4" *ngIf="subLesson?.completedLesson !== null">
+              <p>{{ subLesson?.completedLesson?.createdAt | date: 'mediumDate' }}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ng-container>
+<ng-container *ngIf="isCourseList === true">
+  <ion-row>
+    <ion-col class="ion-no-padding">
+      <ion-row *ngFor="let item of [0, 1, 2, 3, 4]" class="course ion-align-items-center ion-justify-content-center">
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="10" sizeLg="9" sizeXl="9" class="ion-no-padding ion-align-self-center">
+          <ion-row>
+            <ion-col sizeXs="5" sizeSm="5" sizeMd="3" sizeLg="3" sizeXl="3">
+              <ion-thumbnail>
+                <ion-img src="../../../../assets/images/thumbnail-youtube.jpg"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col sizeXs="7" sizeSm="7" sizeMd="9" sizeLg="9" sizeXl="9" class="ion-padding-start">
+              <ion-label>
+                <h2 class="ion-text-wrap">
+                  <ion-skeleton-text animated style="width: 100%;"></ion-skeleton-text>
+                </h2>
+                <p id="scenes-count">
+                  <ion-text>
+                    <ion-skeleton-text animated style="width: 40%;"></ion-skeleton-text>
+                  </ion-text>
+                </p>
+                <p id="tags">
+                  <ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text>
+                  <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+                </p>
+              </ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ng-container>

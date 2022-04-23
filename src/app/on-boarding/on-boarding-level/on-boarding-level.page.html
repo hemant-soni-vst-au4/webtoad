@@ -1,0 +1,88 @@
+<ion-content>
+  <ion-grid class="ion-margin-top">
+    <ion-row *ngIf="isDesktop === true" class="ion-align-items-center ion-justify-content-center">
+      <ion-col size-md="1" size-xl="1" class="ion-align-self-center">
+        <img src="../../../assets/images/logo.png" alt="start english now" />
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col size-xs="12" size-sm="12" size-md="10" size-xl="8" size-lg="8" class="ion-align-self-center">
+        <h5 [ngClass]="{'ion-text-center': isDesktop === true}" class="">
+          I have
+          <strong>3 questions</strong>
+          for you to personalize your learning.
+        </h5>
+      </ion-col>
+    </ion-row>
+    <ion-row class="on-boarding-level ion-align-items-center ion-justify-content-center" #container>
+      <ion-col size-xs="12" size-sm="12" size-md="10" size-xl="8" size-lg="8" class="ion-align-self-center">
+        <h3 class="ion-text-center ion-margin-bottom">
+          1 ) How much you can understand from the below?
+        </h3>
+        <ion-row class="lesson ion-align-items-center ion-justify-content-center">
+          <ion-col
+            sizeXs="12"
+            sizeSm="12"
+            sizeMd="10"
+            sizeLg="8"
+            sizeXl="8"
+            class="ion-align-self-center ion-no-padding youtube-container"
+          >
+            <ngx-y2-player
+              *ngIf="youTubeId !== undefined; else noYouTubeId"
+              #video
+              [videoId]="youTubeId"
+              [playerOptions]="playerOptions"
+              [container]="container"
+              (ready)="onReady($event)"
+              (stateChange)="onStateChange($event)"
+              style="pointer-events: all;"
+            >
+            </ngx-y2-player>
+            <ng-template #noYouTubeId>
+              <!-- <ion-spinner></ion-spinner> -->
+            </ng-template>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center ion-justify-content-center ion-margin-top">
+      <ion-col size-xs="12" size-sm="12" size-md="6" size-xl="4" size-lg="4" class="ion-align-self-center">
+        <ion-radio-group [(ngModel)]="selectedLevel" (ionChange)="selectLevel(selectedLevel)">
+          <ion-item lines="none" *ngFor="let level of levels">
+            <ion-label *ngIf="level.name === 'Elementary'">Not much (0-40%)</ion-label>
+            <ion-label *ngIf="level.name === 'Intermediate'">About half (40-70%)</ion-label>
+            <ion-label *ngIf="level.name === 'Advanced'">Quite a lot (70% or more)</ion-label>
+            <ion-radio color="danger" mode="md" slot="end" [value]="level._id"> </ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-col>
+    </ion-row>
+    <ion-row
+      class="ion-align-items-center ion-justify-content-center ion-margin-top"
+      *ngIf="currentLevel !== undefined && currentLevel?.name !== undefined"
+    >
+      <ion-col size-xs="12" size-sm="12" size-md="6" size-xl="4" size-lg="4" class="ion-align-self-center">
+        <ion-card class="ion-no-margin" mode="ios">
+          <ion-card-content>
+            Cool, we'll recommend
+            <ion-text color="danger"> {{ currentLevel.name | lowercase }} lessons </ion-text>
+            for you. You can always change your level in settings.
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row
+      class="ion-align-items-center ion-justify-content-center ion-margin-top"
+      *ngIf="currentLevel !== undefined && currentLevel?.name !== undefined"
+    >
+      <ion-col size-xs="12" size-sm="12" size-md="6" size-xl="4" size-lg="4" class="ion-align-self-center">
+        <ion-button mode="ios" color="danger" shape="round" expand="block" (click)="nextQuestion()">
+          <strong>OKAY, NEXT QUESTION</strong>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,171 @@
+<ion-content>
+  <ion-grid class="ion-padding h-100">
+    <ion-row class="h-100 auth-form ion-align-items-center">
+      <ion-col size="12" class="ion-align-self-center">
+        <ion-row class="ion-justify-content-center">
+          <!-- <ion-col sizeXs="4" sizeSm="4" sizeLg="2" sizeXl="1" sizeMd="2" class="ion-padding ion-align-self-center">
+            <img src="/assets/images/logo.png">
+          </ion-col> -->
+          <ion-col size-xs="8" size-sm="8" size-lg="4" size-md="4" size-xl="2" class="ion-align-self-center">
+            <img src="../../assets/images/Speaky-Peaky-Logo.png" />
+          </ion-col>
+        </ion-row>
+        <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+          <ion-row class="ion-justify-content-center">
+            <ion-col class="ion-align-self-center" sizeXs="12" sizeSm="12" sizeLg="5" sizeXl="4" sizeMd="6">
+              <ion-row>
+                <ion-col size="12">
+                  <ion-item
+                    mode="ios"
+                    class="auth-inputs ion-no-padding"
+                    [class.invalid]="!f.fullName.valid && (f.fullName.touched || f.fullName.dirty || isSubmitted)"
+                  >
+                    <ion-label position="floating">Name</ion-label>
+                    <ion-input type="text" formControlName="fullName" required></ion-input>
+                  </ion-item>
+                  <ion-text
+                    color="danger"
+                    *ngIf="
+                      !f.fullName.valid && (f.fullName.touched || f.fullName.dirty || isSubmitted) && f.fullName.errors
+                    "
+                  >
+                    <small *ngIf="f.fullName.errors.required">Name is required</small>
+                  </ion-text>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="12">
+                  <ion-item
+                    mode="ios"
+                    class="auth-inputs ion-no-padding"
+                    [class.invalid]="!f.email.valid && (f.email.touched || f.email.dirty || isSubmitted)"
+                  >
+                    <ion-label position="floating">Email</ion-label>
+                    <ion-input
+                      email
+                      (ionBlur)="trimEmail($event, 'email')"
+                      formControlName="email"
+                      pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                      required
+                    ></ion-input>
+                  </ion-item>
+                  <ion-text
+                    color="danger"
+                    *ngIf="!f.email.valid && (f.email.touched || f.email.dirty || isSubmitted) && f.email.errors"
+                  >
+                    <small *ngIf="f.email.errors.required">Email is required</small>
+                    <small *ngIf="f.email.errors.email">Email must be a valid email address</small>
+                  </ion-text>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="12">
+                  <ion-item
+                    mode="ios"
+                    class="auth-inputs ion-no-padding"
+                    [class.invalid]="
+                      !f.confirmEmail.valid && (f.confirmEmail.touched || f.confirmEmail.dirty || isSubmitted)
+                    "
+                  >
+                    <ion-label position="floating">Confirm Email</ion-label>
+                    <ion-input
+                      email
+                      (ionBlur)="trimEmail($event, 'confirmEmail')"
+                      formControlName="confirmEmail"
+                      pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                      required
+                    ></ion-input>
+                  </ion-item>
+
+                  <ion-text
+                    color="danger"
+                    *ngIf="
+                      !f.confirmEmail.valid &&
+                      (f.confirmEmail.touched || f.confirmEmail.dirty || isSubmitted) &&
+                      f.confirmEmail.errors
+                    "
+                  >
+                    <small *ngIf="f.confirmEmail.errors.mustMatch">Confirm email must match</small>
+                    <small *ngIf="f.confirmEmail.errors.required">Confirm email is required</small>
+                    <small *ngIf="f.confirmEmail.errors.email">Confirm email must be a valid email address</small>
+                  </ion-text>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-margin-bottom">
+                <ion-col size="12">
+                  <ion-item
+                    mode="ios"
+                    class="auth-inputs ion-no-padding"
+                    [class.invalid]="!f.password.valid && (f.password.touched || f.password.dirty || isSubmitted)"
+                  >
+                    <ion-label position="floating">Password</ion-label>
+                    <ion-input [type]="!showPass ? 'password' : 'text'" formControlName="password" required>
+                    </ion-input>
+                    <ion-icon
+                      *ngIf="showPass === false; else viewPassword"
+                      slot="end"
+                      class="pwd-btn"
+                      name="eye-off"
+                      (click)="showPassword()"
+                    ></ion-icon>
+                    <ng-template #viewPassword>
+                      <ion-icon class="pwd-btn" slot="end" name="eye" (click)="showPassword()"></ion-icon>
+                    </ng-template>
+                  </ion-item>
+                  <ion-text color="danger" *ngIf="!f.password.valid && (f.password.dirty || isSubmitted)">
+                    <small>Please enter a password.</small>
+                  </ion-text>
+                </ion-col>
+              </ion-row>
+              <ion-row class="termsOfUse">
+                <ion-col size="12">
+                  <ion-checkbox color="danger" mode="md" formControlName="termsOfUse" required> </ion-checkbox>
+                  <ion-label>
+                    <small
+                      >I agree to the
+                      <a class="c-orange" href="https://www.newsite.speakypeaky.com/terms-and-conditions/" target="_blank">
+                        Terms of Use.
+                      </a>
+                    </small>
+                  </ion-label>
+                </ion-col>
+              </ion-row>
+              <ion-row class="termsOfUse">
+                <ion-col size="12">
+                  <ion-checkbox color="danger" mode="md" formControlName="privacyPolicy" required> </ion-checkbox>
+
+                  <ion-label>
+                    <small
+                      >I agree to the
+                      <a class="c-orange" href="https://www.newsite.speakypeaky.com/privacypolicy/" target="_blank">
+                        Privacy Policy.
+                      </a>
+                    </small>
+                  </ion-label>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-margin-top">
+                <ion-col size="12">
+                  <ion-button mode="ios" color="danger" shape="round" expand="block" type="submit">
+                    <strong>SIGN UP</strong>
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="12">
+                  <p class="ion-text-center ion-no-margin">
+                    Already have an account?
+                    <a class="c-orange" [routerLink]="['/login']" routerLinkActive="router-link-active">
+                      Login
+                    </a>
+                    here.
+                  </p>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

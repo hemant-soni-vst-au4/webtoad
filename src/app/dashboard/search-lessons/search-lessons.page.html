@@ -1,0 +1,173 @@
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-margin-top ion-justify-content-center">
+      <ion-col sizeXs="12" sizeSm="12" sizeMd="8" sizeXl="4" sizeLg="6" class="ion-align-self-center">
+        <ion-searchbar
+          mode="md"
+          id="searchKeyWord"
+          name="searchKeyWord"
+          [(ngModel)]="searchKeyWord"
+          showCancelButton="focus"
+          clear-icon="close-circle"
+          (ionFocus)="focusOnSearch(true)"
+          animated
+          placeholder="Search your lesson"
+          (ionClear)="clearInput()"
+          (ionCancel)="onCancel()"
+          (ionChange)="onSearch(searchKeyWord)"
+        >
+        </ion-searchbar>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="!isFocus && searchKeyWord === undefined; else searchLessonsFound">
+      <ion-col size="12" class="ion-no-padding" *ngIf="suggestedCurriculums.length">
+        <ion-row
+          class="ion-align-items-center ion-justify-content-center"
+          *ngFor="let suggestedCurriculum of suggestedCurriculums; trackBy: trackById"
+        >
+          <ion-col
+            sizeXs="12"
+            sizeSm="12"
+            sizeMd="8"
+            sizeXl="4"
+            sizeLg="6"
+            class="ion-align-self-center pointer"
+            [routerLink]="[
+              '/search-list',
+              suggestedCurriculum.lessonTopicId,
+              suggestedCurriculum.title,
+              suggestedCurriculum.day
+            ]"
+            routerLinkActive="router-link-active"
+          >
+            <ion-card mode="ios" class="card">
+              <ion-card-content class="search-categories" mode="ios">
+                <ion-row class="ion-align-items-center ion-justify-content-center">
+                  <ion-col size="8" class="ion-align-self-center ion-text-left">
+                    <ion-text color="dark">
+                      <strong>{{ suggestedCurriculum.title }}</strong>
+                    </ion-text>
+                  </ion-col>
+                  <ion-col size="4">
+                    <ion-img class="search-categories-icon" [src]="suggestedCurriculum.icon"></ion-img>
+                  </ion-col>
+                </ion-row>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+        <ion-row
+          *ngIf="profile?.currentPackage === 'Trial' || profile?.currentPackage === 'SubscriptionExpired'; else pro"
+          class="ion-justify-content-center"
+        >
+          <ion-col sizeXs="12" sizeSm="12" sizeMd="8" sizeXl="4" sizeLg="6" class="ion-align-self-center">
+            <p *ngIf="profile?.trialLessonsLeft <= 1" class="ion-text-center">
+              {{ profile?.trialLessonsLeft }} free lesson is left. <br />
+              Subscribe to unlock more lessons.
+            </p>
+            <p *ngIf="profile?.trialLessonsLeft > 1" class="ion-text-center">
+              {{ profile?.trialLessonsLeft }} free lessons are left. <br />
+              Subscribe to unlock more lessons.
+            </p>
+            <ion-button mode="ios" color="danger" shape="round" expand="block" (click)="onSubscription()">
+              <strong>SUBSCRIBE NOW</strong>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ng-template #pro>
+          <ion-row class="ion-justify-content-center">
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="8" sizeXl="4" sizeLg="6" class="ion-align-self-center">
+              <p class="ion-text-center">Help friends improve English</p>
+              <ion-button
+                mode="ios"
+                color="danger"
+                shape="round"
+                expand="block"
+                [routerLink]="['/share-app']"
+                routerLinkActive="router-link-active"
+              >
+                <strong>SHARE NOW</strong></ion-button
+              >
+            </ion-col>
+          </ion-row>
+        </ng-template>
+      </ion-col>
+    </ion-row>
+    <ng-template #searchLessonsFound>
+      <ion-row>
+        <ion-col size="12" class="ion-no-padding">
+          <ion-row *ngIf="isSearch === false" class="ion-justify-content-center">
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="10" sizeLg="9" sizeXl="9" class="ion-align-self-center">
+              <ion-list mode="md" class="ion-no-padding" list="none">
+                <ion-item
+                  class="pointer"
+                  *ngFor="let lesson of lessons"
+                  mode="md"
+                  (click)="onLessonDetails(lesson._id)"
+                >
+                  <ion-thumbnail slot="start">
+                    <ion-img src="{{ lesson.thumbnail }}"></ion-img>
+                  </ion-thumbnail>
+                  <ion-label>
+                    <h2 class="ion-text-wrap">{{ lesson.lessonName }}</h2>
+                    <p>
+                      <ion-text>
+                        {{ lesson.videoLevel }}
+                      </ion-text>
+                    </p>
+                  </ion-label>
+                  <ion-icon mode="ios" name="chevron-forward" slot="end"></ion-icon>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+
+          <ng-container *ngIf="isSearch === true">
+            <ion-spinner></ion-spinner>
+          </ng-container>
+
+          <ion-row
+            *ngIf="isSearch === false && lessons.length === 0"
+            class="ion-text-center ion-align-items-center ion-justify-content-center ion-margin-top"
+          >
+            <ion-col
+              *ngIf="searchKeyWord !== undefined && searchNotFound"
+              sizeXs="12"
+              sizeSm="12"
+              sizeMd="6"
+              sizeXl="4"
+              sizeLg="4"
+              class="ion-align-self-center"
+            >
+              <img class="ion-margin-bottom" src="../../../assets/images/search-lessons-not-found.png" width="30%" />
+              <h3 style="font-weight: 400;">
+                No results for <b>"{{ searchKeyWord }}"</b><br />
+                Try again using different spelling or keywords
+              </h3>
+            </ion-col>
+            <ion-col
+              *ngIf="searchKeyWord === undefined"
+              sizeXs="12"
+              sizeSm="12"
+              sizeMd="6"
+              sizeXl="4"
+              sizeLg="4"
+              class="ion-align-self-center"
+            >
+              <img class="ion-margin-bottom" src="../../../assets/images/search-lessons.png" width="30%" />
+              <h3>
+                Explore the lessons
+              </h3>
+              <ion-text>
+                Search for keywords, accents, topics, and genres.
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ng-template>
+  </ion-grid>
+  <ion-infinite-scroll *ngIf="searchKeyWord" threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

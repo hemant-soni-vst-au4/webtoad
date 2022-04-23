@@ -1,0 +1,106 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" mode="md">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button mode="md" (click)="home()">
+        <ion-icon color="dark" mode="md" slot="icon-only" src="../../../../../../assets/images/home.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-progress-bar *ngIf="!isProductLoaded" type="indeterminate"></ion-progress-bar>
+  <ion-grid *ngIf="isProductLoaded" class="ion-padding">
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12" class="ion-align-self-center">
+        <ion-row class="ion-align-items-center ion-justify-content-center">
+          <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="6" sizeXl="9" class="ion-align-self-center">
+            <h1 class="ion-no-margin"><strong>Subscription Status</strong></h1>
+            <p>
+              <!-- You have not subscribed yet <br> -->
+              Unlock the journey to speak English fluently
+            </p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center ion-justify-content-center">
+          <ion-col>
+
+             <!-- <ion-row class="productCard ion-align-items-center ion-justify-content-center"
+              (click)="checkoutIAP(productIds[0])">
+              <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="6" sizeXl="4" class="ion-align-self-center">
+                <div class="flag">
+                  40% off
+                </div>
+                <ion-card class="ion-margin-top subscription-card light-bg year ion-no-margin" mode="ios">
+                  <ion-card-content>
+                    <h1 class="subscription-title ion-text-center">
+                      Yearly ( Unlimited Lessons )
+                    </h1>
+                    <h1 class="subscription-amount ion-text-center">
+                      {{ 71.8 | currency }} <span>({{ 5.99 | currency }} / month )</span>
+                    </h1> -->
+                    <!-- <p>{{products[0]?.state}}</p> -->
+                  <!-- </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row> --> 
+
+            <ion-row class="productCard ion-align-items-center ion-justify-content-center"
+              (click)="checkoutIAP(productIds[1])">
+              <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="6" sizeXl="4" class="ion-align-self-center">
+                <div class="flag">
+                  20% off
+                </div>
+                <ion-card class="ion-margin-top subscription-card light-bg half-year ion-no-margin" mode="ios">
+                  <ion-card-content>
+                    <h1 class="subscription-title ion-text-center">
+                      6 Months ( Unlimited Lessons )
+                    </h1>
+                    <h1 class="subscription-amount ion-text-center">
+                      {{ 47.9 | currency }} <span>({{ 7.99 | currency }} / month )</span>
+                    </h1>
+                    <!-- <p>{{products[1]?.state}}</p> -->
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="productCard ion-align-items-center ion-justify-content-center"
+              (click)="checkoutIAP(productIds[2])">
+              <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="6" sizeXl="4" class="ion-align-self-center">
+                <ion-card class="ion-margin-top subscription-card monthly ion-no-margin" mode="ios">
+                  <ion-card-content>
+                    <h1 class="subscription-title ion-text-center">
+                      Monthly ( 30 Lessons )
+                    </h1>
+                    <h1 class="subscription-amount ion-text-center">{{ 9.99 | currency }} / <span>month</span></h1>
+                    <!-- <p class="ion-text-center"> * Unstudied number of lessons won’t be transferred to the next month. <br>
+                      * You can purchase extra lessons if you want to study more.
+                    </p> -->
+                    <p>
+                      <!-- {{products[2]?.state}} -->
+                    </p>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center ion-justify-content-center">
+          <ion-col sizeXs="12" sizeSm="12" sizeMd="7" sizeLg="6" sizeXl="6" class="ion-align-self-center">
+            <p class="ion-text-center">
+              Subscription automatically renews unless auto-renew is turned off. Subscriptions may be managed by the
+              user and auto-renewal may be turned off by going to settings > account > subscription status.
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
